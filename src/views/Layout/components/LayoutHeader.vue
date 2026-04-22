@@ -1,16 +1,6 @@
 <script setup>
-import { getCategoryAPI } from '@/apis/layout'
-import { onMounted,ref } from 'vue';
-
-const categoryList = ref([])  //定义一个响应式变量来存储分类数据
-const getCategory = async () => {
-    const res = await getCategoryAPI()
-    categoryList.value = res.result
-}
-
-onMounted(() => {   //选择合适的生命周期函数来调用接口函数
-    getCategory()
-})
+import { useCategoryStore } from '@/stores/category';
+const categoryStore = useCategoryStore()
 </script>
 
 <template>
@@ -23,7 +13,7 @@ onMounted(() => {   //选择合适的生命周期函数来调用接口函数
         <li class="home">
           <RouterLink to="/">首页</RouterLink>
         </li>
-        <li class="home" v-for="item in categoryList" :key="item.id">
+        <li class="home" v-for="item in categoryStore.categoryList" :key="item.id">
           <RouterLink to="/">{{ item.name }}</RouterLink>
         </li>
       </ul>
