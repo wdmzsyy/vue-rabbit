@@ -15,4 +15,10 @@ export const findNewAPI = () => { //导出函数
     return httpInstance({
         url: '/home/new'   //httpInstance({ url: ... }) 返回的是一个 Promise 对象（因为 axios 请求是异步的）
     })
+} 
+
+export const getHotAPI = () => {
+    return httpInstance({
+        url: '/home/hot'
+    })
 }
