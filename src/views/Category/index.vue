@@ -4,20 +4,28 @@ import { onMounted, ref } from 'vue'
 import { useRoute } from 'vue-router'   //获取路由参数
 import { getBannerAPI } from '@/apis/home'
 import GoodsItem from '../Home/components/GoodsItem.vue'
+import { onBeforeRouteUpdate } from 'vue-router'
 
 //获取数据
 const categoryData = ref({})    //返回响应是Object一个对象，所以用{}
 const route = useRoute()
-const getCategory = async () => {
-    const res = await getCategoryAPI(route.params.id)
+const getCategory = async (id = route.params.id) => {   //默认参数
+    const res = await getCategoryAPI(id)
     categoryData.value = res.result
 }
-
 onMounted(() => getCategory())
+
+//解决路由缓存问题方法②：
+//目标：路由参数变化的时候，可以把分类数据接口重新发送（用getCategory发）
+onBeforeRouteUpdate((to) => {   //to代表目标路由对象
+    console.log("路由变化了")
+    //存在问题：使用最新的路由参数请求最新的分类数据
+    console.log(to)
+    getCategory(to.params.id)   //如果你传了id，就以这个最新id为主，如果不传的话就是默认参数
+})
 
 //获取banner
 const bannerList = ref([])
-
 const getBanner = async () => {
     const res = await getBannerAPI({
         distributionSite: '2'
