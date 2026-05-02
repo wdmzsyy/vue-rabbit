@@ -18,6 +18,7 @@ onMounted(() => getNewList())
     <HomePanel title="新鲜好物" sub-title="新鲜出炉 品质靠谱">
         <ul class="goods-list">
             <li v-for="item in newList" :key="item.id">
+                <!-- 跳转到detail商品详情页面⬇ -->
                 <RouterLink :to="`/detail/${item.id}`">
                     <img :src="item.picture" alt="" />
                     <p class="name">{{ item.name }}</p>
