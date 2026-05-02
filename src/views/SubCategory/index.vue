@@ -16,6 +16,8 @@ onMounted(() => getCategoryData())
 
 //获取基础列表数据渲染
 const goodList = ref([])
+//reqData 是请求参数的响应式对象(容器)，用于控制后端返回哪一页、按什么排序的商品。
+//它让你能够通过修改参数（如点击分页、切换排序）轻松刷新列表数据。/category/sub/goods?categoryId=xxx&page=1&pageSize=20&sortField=publishTime
 const reqData = ref({
     categoryId: route.params.id,
     page: 1,
@@ -28,6 +30,14 @@ const getGoodList = async () => {
     goodList.value = res.result.items
 }
 onMounted(() => getGoodList())
+
+//tab切换回调
+const tabChange = () => {
+    console.log("tab切换了", reqData.value.sortField)
+    //重新发送网络请求，并且页数需重置
+    reqData.value.page = 1
+    getGoodList()   
+}
 </script>
 
 <template>
@@ -42,7 +52,8 @@ onMounted(() => getGoodList())
             </el-breadcrumb>
         </div>
         <div class="sub-container">
-            <el-tabs>
+            <!-- v-model双向绑定：发生切换时会自动把name值存到v-model里的sortField里，name则根据接口文档确定 --> 
+            <el-tabs v-model="reqData.sortField" @tab-change="tabChange">
                 <el-tab-pane label="最新商品" name="publishTime"></el-tab-pane>
                 <el-tab-pane label="最高人气" name="orderNum"></el-tab-pane>
                 <el-tab-pane label="评论最多" name="evaluateNum"></el-tab-pane>
