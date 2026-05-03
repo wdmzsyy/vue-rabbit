@@ -1,5 +1,6 @@
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
+import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 
 import App from './App.vue'
 import router from './router'
@@ -13,8 +14,11 @@ import { lazyPlugin } from '@/directives'
 import { componentPlugin } from './components'
 
 const app = createApp(App)
-
-app.use(createPinia())
+// 在设置state的时候会自动把数据同步给localstorage，在获取state数据的时候会优先从localStorage中取，避免刷新丢失
+const pinia = createPinia()
+// 注册持久化插件
+pinia.use(piniaPluginPersistedstate)
+app.use(pinia)
 app.use(router)
 app.use(lazyPlugin)
 app.use(componentPlugin)
