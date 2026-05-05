@@ -6,7 +6,7 @@ import { ElMessage } from 'element-plus'
 import 'element-plus/theme-chalk/el-message.css'   //样式得单独引入，按需引入
 import { useRouter } from 'vue-router';     //带r的是调用方法，不带r的是获取参数
 
-import { useUserStore } from '@/stores/user';
+import { useUserStore } from '@/stores/userStore';
 const userStore = useUserStore()
 
 // 1.按照接口字段准备表单对象并绑定

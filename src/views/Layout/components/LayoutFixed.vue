@@ -1,7 +1,7 @@
 <script setup>
 import { get, useScroll } from '@vueuse/core';
 const { y } = useScroll(window)  //监听窗口的滚动位置
-import { useCategoryStore } from '@/stores/category';
+import { useCategoryStore } from '@/stores/categoryStore';
 
 //使用pinia中的数据
 const categoryStore = useCategoryStore()
