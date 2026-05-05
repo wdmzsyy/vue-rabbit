@@ -29,10 +29,10 @@ const countChange = (count) => {
 }
 
 // 添加购物车
-const addCart = () => {
+const addCart = () => { //组件里的 addCart 是一个事件处理函数，点击按钮时触发
     if (skuObj.skuId) {
-        //规则已经选择，触发action，先传参
-        cartStore.addCart({
+        // 传了个对象给cartStore.addCart，然后Store里的addCart接收这个对象作为参数，并直接对它进行解构赋值
+        cartStore.addCart({     //cartStore.addCart 是挂载在 Store 实例上的方法，两个addCart实际上不一样
             id: goods.value.id, // 商品id
             name: goods.value.name, // 商品名称
             picture: goods.value.mainPictures[0], // 图片
