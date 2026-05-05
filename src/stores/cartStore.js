@@ -30,6 +30,13 @@ export const useCartStore = defineStore('cart', () => {
         cartList.value.splice(idx, 1)
     }
 
+    // 单选功能
+    const singleCheck = (skuId, selected) => {
+        // 通过skuId找到要修改的那一项，然后把它的selected修改为传来的selected
+        const item = cartList.value.find((item) => item.skuId === skuId)
+        item.selected = selected
+    }
+
     // 计算属性
     // 1.总的数量 所有项的count之和
     // a：累加器，表示之前计算出的总价格。 c：当前商品对象，包含商品的 count 和 price 属性。
@@ -41,7 +48,8 @@ export const useCartStore = defineStore('cart', () => {
         allCount,
         allPrice,
         addCart,
-        delCart
+        delCart,
+        singleCheck
     }
 },{
     persist: true,
