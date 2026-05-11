@@ -63,7 +63,7 @@ const router = createRouter({
           component: Member,
           children: [     // 三级路由，path路径和index.vue的<RouterLink to="/member/user">个人中心</RouterLink>对应
             {
-              path: 'user',
+              path: '',   // 当出现路由嵌套时，如果想在二级路由显示的时候把三级路由作为默认选项就把其path置空
               component: UserInfo
             },
             {
