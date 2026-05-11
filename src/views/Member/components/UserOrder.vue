@@ -58,7 +58,7 @@ const orderList = []
                                 </ul>
                             </div>
                             <div class="column state">
-                                <p>{{ fomartPayState(order.orderState) }}</p>
+                                <p>{{ order.orderState }}</p>
                                 <p v-if="order.orderState === 3">
                                     <a href="javascript:;" class="green">查看物流</a>
                                 </p>
@@ -94,8 +94,7 @@ const orderList = []
                     </div>
                     <!-- 分页 -->
                     <div class="pagination-container">
-                        <el-pagination :total="total" @current-change="pageChange" :page-size="params.pageSize" background
-                            layout="prev, pager, next" />
+                        <el-pagination background layout="prev, pager, next" />
                     </div>
                 </div>
             </div>
