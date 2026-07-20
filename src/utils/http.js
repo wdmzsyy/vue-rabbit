@@ -5,8 +5,13 @@ import 'element-plus/theme-chalk/el-message.css'
 import { useUserStore } from "@/stores/userStore";
 import router from '@/router';
 
+// const httpInstance = axios.create({
+//     baseURL: 'http://pcapi-xiaotuxian-front-devtest.itheima.net',   //前置URL
+//     timeout: 10000
+// })
+
 const httpInstance = axios.create({
-    baseURL: 'http://pcapi-xiaotuxian-front-devtest.itheima.net',   //前置URL
+    baseURL: '/api',  // 走 Vite 代理，不再直接请求跨域地址
     timeout: 10000
 })
 
